@@ -9,14 +9,26 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/contact', async (req, res) => {
+router.post('/contact', (req, res) => {
+  const { firstName, lastName, email, commentOrConcern } = req.body;
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: 'johnson.gregory.b@outlook.com', // Change to your recipient
     from: '3531op@gmail.com', // Change to your verified sender
-    subject: 'Sending with SendGrid is Fun',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    subject: 'Message from user JRK site.',
+    html:
+      '<div> Customers First Name: ' +
+      firstName +
+      '</div>' +
+      '<div> Customers Last Name: ' +
+      lastName +
+      '</div>' +
+      '<div> Users email: ' +
+      email +
+      '</div>' +
+      '<div> Comment or Concern: ' +
+      commentOrConcern +
+      '</div>',
   };
   sgMail
     .send(msg)
