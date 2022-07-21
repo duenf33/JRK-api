@@ -16,25 +16,16 @@ router.post('/contact', (req, res) => {
     to: 'johnson.gregory.b@outlook.com', // Change to your recipient
     from: '3531op@gmail.com', // Change to your verified sender
     subject: 'Message from user JRK site.',
-    html:
-      '<div> Customers First Name: ' +
-      firstName +
-      '</div>' +
-      '<div> Customers Last Name: ' +
-      lastName +
-      '</div>' +
-      '<div> Users email: ' +
-      email +
-      '</div>' +
-      '<div> Comment or Concern: ' +
-      commentOrConcern +
-      '</div>',
+    html: `<div> Name: ${firstName} ${lastName}</div>
+           <div> Email: ${email}</div>
+           <div> Message: ${commentOrConcern}\n</div>`,
   };
   sgMail
     .send(msg)
     .then(() => {
+      console.log('msg:', msg);
       console.log('Email sent');
-      res.json('Email sent');
+      res.json('email sent');
     })
     .catch((err) => {
       console.error(JSON.stringify(err));
