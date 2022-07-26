@@ -32,15 +32,12 @@ router.post('/captcha-verification', async (req, res) => {
   try {
     console.log('req.body.value:', req.body.value);
     const verifyCaptcha = await axios.post(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRET_KEY}&response=${req.body.value}`,
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        },
-      }
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRET_KEY}&response=${req.body.value}`
     );
+
     console.log('VerifyCaptcha ran');
     console.log(verifyCaptcha);
+    res.json(verifyCaptcha);
   } catch (error) {
     console.log(error);
   }
